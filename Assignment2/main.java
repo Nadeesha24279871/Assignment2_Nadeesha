@@ -9,9 +9,6 @@ import java.io.*;
 import java.util.*;
 import java.io.BufferedReader;
 
-
-    
-        
 class students{
     private String firstName;
     private String lastName;
@@ -33,7 +30,7 @@ class students{
         return lastName;
     }
 
-    public void setLastName(String LastName){
+    public void setLastName(String lastName){
         this.lastName= lastName;
     }
 
@@ -41,7 +38,7 @@ class students{
         return unitName;
     }
 
-    public void setUnitName(String UnitName){
+    public void setUnitName(String unitName){
         this.unitName=unitName;
     }
 
@@ -79,27 +76,30 @@ class students{
     public void setA3(double a3){
         this.a3= a3;
     }
+
 }
 
-class studentStatistics{
+class studentsStatics{
 
     void calculateTotalMarks(List<students> value) {
 
         for (students stu: value) {
-            System.out.println("Name:"+ stu.getFirstName().concat(" ").concat(stu.getLastName()));
+            System.out.println("Name:"+ stu.getFirstName().trim()+(" ")+(stu.getLastName().trim()));
             System.out.println("Student Id:"+ stu.getStudentId());
             System.out.println("A1:"+ stu.getA1());
             System.out.println("A2:"+ stu.getA2());
             System.out.println("A3:"+ stu.getA3());
-            double total = stu.getA1()+ stu.getA2()+stu.getA3();
+            double total = stu.getA1()+stu.getA2()+stu.getA3();
             System.out.println("Total Mark:"+ total);
 
             System.out.println();
 
         }
+
     }
 
     List<students> initializeData(List<String> value){
+
         List<students> studentList = new ArrayList<>();
         String unitName = "";
 
@@ -107,6 +107,7 @@ class studentStatistics{
             students st =new students();
             if(i==0) {
                 unitName = value.get(0);
+
             }else if(i>=2) {
 
                 String[] val = value.get(i).split(",");
@@ -123,7 +124,7 @@ class studentStatistics{
 
                 if(val.length > 3)  {
                     if(!(val[3].isEmpty())) {
-                        st.setA1(Double.parseDouble(val[3]));
+                        st.setA1(Double.parseDouble(val[3].trim()));
                     } else {
                         st.setA1(0);
                     }
@@ -131,14 +132,14 @@ class studentStatistics{
                 }
                 if(val.length > 4)  {
                     if(!(val[4].isEmpty())) {
-                        st.setA2(Double.parseDouble(val[4]));
+                        st.setA2(Double.parseDouble(val[4].trim()));
                     } else {
                         st.setA2(0);
                     }
                 }
                 if(val.length > 5)  {
                     if(!(val[5].isEmpty())) {
-                        st.setA3(Double.parseDouble(val[5]));
+                        st.setA3(Double.parseDouble(val[5].trim()));
                     } else {
                         st.setA3(0);
                     }
@@ -153,13 +154,39 @@ class studentStatistics{
 
     }
 
+    void readFromFile(List<students> value){
+
+        String unitName =  value.get(0).getUnitName();
+        System.out.println("Unit Name:"+ unitName);
+        System.out.println();
+
+        for (students stu:value) {
+
+            System.out.println("Name:"+ stu.getFirstName().trim()+(" ")+(stu.getLastName().trim()));
+            System.out.println("Student Id:"+ stu.getStudentId());
+            System.out.println("A1:"+ stu.getA1());
+            System.out.println("A2:"+ stu.getA2());
+            System.out.println("A3:"+ stu.getA3());
+            System.out.println();
+
+        }
+
+    }
+
     void listStudentsBelowThreshold(double d, List<students> value){
+        int i = 0;
+
         for (students stu:value) {
 
             double total = stu.getA1()+ stu.getA2()+ stu.getA3();
             if(total<d) {
-                System.out.println("Name:"+ stu.getFirstName().concat(" ").concat(stu.getLastName()));
+                System.out.println("Name:"+ stu.getFirstName().trim()+(" ")+(stu.getLastName().trim()));
+                i++;
             }
+        }
+        System.out.println("i"+i);
+        if(i==0){
+            System.out.println("No students below that mark");
         }
     }
 
@@ -176,36 +203,36 @@ class studentStatistics{
 
             if(d1[0]<total) {
                 d1[0]=total;
-                high[0] = "Name:"+ stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                high[0] = "Name:"+ stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("         Total Mark")+(Double.toString(total));
             } else if(d1[1]<total) {
                 d1[1] = total;
-                high[1] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("         ").concat("Total Mark").concat(Double.toString(total));
+                high[1] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("         Total Mark")+(Double.toString(total));
             }else if(d1[2]<total) {
                 d1[2] = total;
-                high[2] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                high[2] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("          Total Mark")+(Double.toString(total));
             }else if(d1[3]<total) {
                 d1[3] = total;
-                high[3] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                high[3] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("          Total Mark")+(Double.toString(total));
             }else if(d1[4]<total) {
                 d1[4] = total;
-                high[4] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                high[4] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("          Total Mark")+(Double.toString(total));
             }
 
             if(d2[0]>total) {
                 d2[0]=total;
-                low[0] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                low[0] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("          Total Mark")+(Double.toString(total));
             } else if(d2[1]>total) {
                 d2[1] = total;
-                low[1] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                low[1] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("          Total Mark")+(Double.toString(total));
             }else if(d2[2]>total) {
                 d2[2] = total;
-                low[2] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                low[2] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("          Total Mark")+(Double.toString(total));
             }else if(d2[3]>total) {
                 d2[3] = total;
-                low[3] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                low[3] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("          Total Mark")+(Double.toString(total));
             }else if(d2[4]>total) {
                 d2[4] = total;
-                low[4] = "Name:"+stu.getFirstName().concat(" ").concat(stu.getLastName()).concat("          ").concat("Total Mark").concat(Double.toString(total));
+                low[4] = "Name:"+stu.getFirstName().trim()+(" ")+(stu.getLastName()).trim()+("          Total Mark")+(Double.toString(total));
             }
 
         }
@@ -224,115 +251,81 @@ class studentStatistics{
 
     }
 
-    void readFromFile(List<students> value){
-        String unitName =  value.get(0).getUnitName();
-        System.out.println("Unit Name:"+ unitName);
-        System.out.println();
-
-        for (students stu:value) {
-
-            System.out.println("Name:"+ stu.getFirstName().concat(" ").concat(stu.getLastName()));
-            System.out.println("Student Id:"+ stu.getStudentId());
-            System.out.println("A1:"+ stu.getA1());
-            System.out.println("A2:"+ stu.getA2());
-            System.out.println("A3:"+ stu.getA3());
-            System.out.println();
-
-        }
-
-    }
-
 }
 public class main{
-public static void main (String[] args){
-            System.out.println("This program is developed to compute statistics of students' marks in an assignment from a given file ");
-            Scanner sc = new Scanner(System.in);
-            System.out.println("\nPlease enter the file name");
-            String fileName = sc.next();
-            studentStatistics obj = new studentStatistics();
+    public static void main (String[] args){
+        System.out.println("This program is developed to compute statistics of students' marks in an assignment from a given file ");
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\nPlease enter the file name");
+        String fileName = sc.next();
+        studentStatistics obj = new studentStatistics();
 
-            List<String> values = new ArrayList<>();
-            String row;
-            try{
-                File csvFile = new File("C:\\Users\\nadee\\OneDrive\\Desktop\\UNI\\PF\\Assignment2_Nadeesha\\Documents\\"+ fileName);
-                FileReader fileReader= new FileReader(csvFile);
-                BufferedReader br = new BufferedReader(fileReader);
+        List<String> values = new ArrayList<>();
+        String row;
+        try{
+            File csvFile = new File("C:\\Users\\nadee\\OneDrive\\Desktop\\UNI\\PF\\Assignment2_Nadeesha\\Documents\\"+ fileName);
+            FileReader fileReader= new FileReader(csvFile);
+            BufferedReader br = new BufferedReader(fileReader);
 
-                while((row = br.readLine()) != null) {
-                    values.add(row);
+            while((row = br.readLine()) != null) {
+                values.add(row);
 
-                    
-                } 
-                menu(values);
-                
-               
-            }
-            catch(IOException e) {
-                System.err.println("Error reading the file: " + e.getMessage());
-            } finally {
-                 
-            	
-            }
-            
-           }
-        
-        
-        static void menu(List<String> values) {
-             
-        	Scanner sc = new Scanner(System.in);
-        	studentStatistics obj = new studentStatistics();
+            } 
+            menu(values);
 
-        	
-        	List<students> studentsList = new ArrayList<>();
-            studentsList = obj.initializeData(values);
-            
-  
+        }
+        catch(IOException e) {
+            System.err.println("Error reading the file: " + e.getMessage());
+        } 
+    }
 
-            int option = 0;
-            while(option!=5){
+    static void menu(List<String> values) {
 
-                System.out.println("\nMenu");
-                System.out.println("\n1. Read students data");
-                System.out.println("\n2. Calculate the total marks for each student ");
-                System.out.println("\n3. list the students with total marks less than a threshold");
-                System.out.println("\n4. Show five students with highest marks and lowest marks "); 
-                System.out.println("\n5. Exit the program");
-                System.out.println("\nPlease enter your choice ( 1- 5) ");
+        Scanner sc = new Scanner(System.in);
+        studentStatistics obj = new studentStatistics();
 
-                option = sc.nextInt();
+        List<students> studentsList = new ArrayList<>();
+        studentsList = obj.initializeData(values);
 
-                switch(option){
-                    case 1:
-                        System.out.println("Enter the file name ");
-                        obj.readFromFile(studentsList);
-                        break;
-                    case 2:
-                        obj.calculateTotalMarks(studentsList);
-                        break;
-                    case 3:
-                        System.out.println("Enter the threshold value ");
-                        double t = sc.nextDouble();
-                        obj.listStudentsBelowThreshold(t,studentsList);
-                        break;
-                    case 4:
-                        obj.showStudentsWithLowestAndHighestMarks(studentsList);
-                        break;
-                    case 5:
-                        System.out.println("Exit the program ");
-                        System.exit(0);
+        int option = 0;
+        while(option!=5){
 
-                    default:
-                        System.out.println("Invalid option entered."); 
-                        System.out.println("\nPlease select the option from the menu and enter a number");
+            System.out.println("\nMenu");
+            System.out.println("\n1. Read students data");
+            System.out.println("\n2. Calculate the total marks for each student ");
+            System.out.println("\n3. list the students with total marks less than a threshold");
+            System.out.println("\n4. Show five students with highest marks and lowest marks "); 
+            System.out.println("\n5. Exit the program");
+            System.out.println("\nPlease enter your choice ( 1- 5) ");
 
-                }
+            option = sc.nextInt();
+
+            switch(option){
+                case 1:
+                    System.out.println("Enter the file name ");
+                    obj.readFromFile(studentsList);
+                    continue;
+                case 2:
+                    obj.calculateTotalMarks(studentsList);
+                    continue;
+                case 3:
+                    System.out.println("Enter the threshold value ");
+                    double t = sc.nextDouble();
+                    obj.listStudentsBelowThreshold(t,studentsList);
+                    continue;
+                case 4:
+                    obj.showStudentsWithLowestAndHighestMarks(studentsList);
+                    continue;
+                case 5:
+                    System.out.println("Exit the program ");
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid option entered."); 
+                    System.out.println("\nPlease select the option from the menu and enter a number");
+
             }
         }
-        }
-
-
-
-
-
-    
+    }
+}
 
