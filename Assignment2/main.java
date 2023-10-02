@@ -156,11 +156,12 @@ class studentsStatics{
 
     void readFromFile(List<students> value){
 
+        
+
+        for (students stu:value) {
         String unitName =  value.get(0).getUnitName();
         System.out.println("Unit Name:"+ unitName);
         System.out.println();
-
-        for (students stu:value) {
 
             System.out.println("Name:"+ stu.getFirstName().trim()+(" ")+(stu.getLastName().trim()));
             System.out.println("Student Id:"+ stu.getStudentId());
@@ -290,13 +291,20 @@ public class main{
 
         List<students> studentsList = new ArrayList<>();
         studentsList = obj.initializeData(values);
+        if (!studentsList.isEmpty()) {
+            System.out.println("\n  This file contains the marks of  " + studentsList.get(0).getUnitName());
+        }
+            System.out.println("\n  You can choose an option from the menu below"); 
     
 
         try{
         int option = 0;
+        
         while(option!=5){
-
+            
+            
             System.out.println("\nMenu");
+            System.out.println();
             System.out.println("\n1. Read students data");
             System.out.println("\n2. Calculate the total marks for each student ");
             System.out.println("\n3. list the students with total marks less than a threshold");
@@ -328,12 +336,13 @@ public class main{
 
                 default:
                     System.out.println("Invalid option entered."); 
-                    System.out.println("\nPlease select the option from the menu and enter a number from 1 to 5");
+                    
 
             }
         }
     }catch(InputMismatchException e){
         System.out.println("Invalid option entered.");
+        System.out.println("\nPlease select the option from the menu and enter a number from 1 to 5");
         menu(values);
     }
 }
