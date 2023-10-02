@@ -175,16 +175,20 @@ class studentsStatics{
 
     void listStudentsBelowThreshold(double d, List<students> value){
         int i = 0;
+        
 
         for (students stu:value) {
 
             double total = stu.getA1()+ stu.getA2()+ stu.getA3();
             if(total<d) {
+                ++i;
+                System.out.println("The students who scored marks below the threshold value :");
+
                 System.out.println("Name:"+ stu.getFirstName().trim()+(" ")+(stu.getLastName().trim()));
-                i++;
+
             }
         }
-        System.out.println("i"+i);
+        
         if(i==0){
             System.out.println("No students below that mark");
         }
@@ -286,7 +290,9 @@ public class main{
 
         List<students> studentsList = new ArrayList<>();
         studentsList = obj.initializeData(values);
+    
 
+        try{
         int option = 0;
         while(option!=5){
 
@@ -322,10 +328,14 @@ public class main{
 
                 default:
                     System.out.println("Invalid option entered."); 
-                    System.out.println("\nPlease select the option from the menu and enter a number");
+                    System.out.println("\nPlease select the option from the menu and enter a number from 1 to 5");
 
             }
         }
+    }catch(InputMismatchException e){
+        System.out.println("Invalid option entered.");
+        menu(values);
     }
+}
 }
 
